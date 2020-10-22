@@ -9,7 +9,7 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 28
     defaultConfig {
-        applicationId "com.design.sunflower"
+        applicationId "com.design.myapplication"
         minSdkVersion 16
         targetSdkVersion 28
         versionCode 1
@@ -21,14 +21,19 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField 'String', 'API_KEY', "b771657722c3474e9382871b95bae876"
+        }
+        debug {
+            buildConfigField 'String', 'API_KEY', "b771657722c3474e9382871b95bae876"
         }
     }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    dataBinding{
-        enabled =true
+    dataBinding {
+        enabled = true
     }
     // work-runtime-ktx 2.1.0 and above now requires Java 8
     kotlinOptions {
@@ -37,7 +42,12 @@ android {
 }
 
 dependencies {
+
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxjava_version"
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxandroid_version"
     //room compiler
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.1'
     kapt "androidx.room:room-compiler:$rootProject.roomVersion"
     //Glide compiler
     kapt "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
